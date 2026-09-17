@@ -1,8 +1,7 @@
 "use client";
 
-import { motion, useSpring, useTransform } from "motion/react";
+import { useEffect, useRef } from "react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { useMousePositionValue } from "@/hooks/useMousePositionValue";
 import { cn } from "@/lib/utils";
 
 const MAX_PARALLAX = 18; // px, within the 15-20px range from docs/DESIGN-TOKENS.md
@@ -12,50 +11,44 @@ interface GlowBackgroundProps {
 }
 
 // Normalize a raw viewport coordinate to a small clamped offset around center.
-// `value === 0` is the pre-first-mousemove state (the MotionValue's initial):
-// resolve it to no offset so SSR and the first client render agree (`window` is
-// absent on the server) — a real pointer at x=0 landing here is a 1px non-issue.
 function parallax(value: number, extent: number): number {
-  if (value === 0 || extent <= 0) return 0;
+  if (extent <= 0) return 0;
   const offset = (value / extent - 0.5) * MAX_PARALLAX * 2;
   return Math.max(-MAX_PARALLAX, Math.min(MAX_PARALLAX, offset));
 }
 
 export function GlowBackground({ className }: GlowBackgroundProps) {
   const prefersReducedMotion = useReducedMotion();
-  const { x, y } = useMousePositionValue(!prefersReducedMotion);
+  const rootRef = useRef<HTMLDivElement>(null);
 
-  const rawX = useTransform(x, (v) =>
-    prefersReducedMotion
-      ? 0
-      : parallax(v, typeof window !== "undefined" ? window.innerWidth : 0),
-  );
-  const rawY = useTransform(y, (v) =>
-    prefersReducedMotion
-      ? 0
-      : parallax(v, typeof window !== "undefined" ? window.innerHeight : 0),
-  );
+  useEffect(() => {
+    if (prefersReducedMotion || typeof window === "undefined") return;
 
-  const springX = useSpring(rawX, { stiffness: 60, damping: 20 });
-  const springY = useSpring(rawY, { stiffness: 60, damping: 20 });
-  const blobBX = useTransform(springX, (v) => -v);
-  const blobBY = useTransform(springY, (v) => -v);
+    // CSS-custom-property pattern: no React state, just an imperative write;
+    // the `var(--glow-x, 0px)` fallback in globals.css keeps SSR and the
+    // pre-interaction client render identical.
+    const handleMove = (event: MouseEvent) => {
+      const el = rootRef.current;
+      if (!el) return;
+      el.style.setProperty("--glow-x", `${parallax(event.clientX, window.innerWidth)}px`);
+      el.style.setProperty("--glow-y", `${parallax(event.clientY, window.innerHeight)}px`);
+    };
+    window.addEventListener("mousemove", handleMove);
+    return () => window.removeEventListener("mousemove", handleMove);
+  }, [prefersReducedMotion]);
 
   return (
     <div
+      ref={rootRef}
       data-testid="glow-parallax"
       className={cn("absolute inset-0 overflow-hidden pointer-events-none", className)}
     >
       <div className="grid-pattern absolute inset-0 opacity-40" />
-      <motion.div
+      <div
         data-testid="glow-blob"
-        className="absolute -top-40 -left-40 h-[36rem] w-[36rem] rounded-full bg-accent-blue opacity-[0.06] blur-[90px]"
-        style={{ x: springX, y: springY }}
+        className="glow-blob glow-blob-a absolute -top-40 -left-40 h-[36rem] w-[36rem] rounded-full bg-accent-blue opacity-[0.06] blur-[90px]"
       />
-      <motion.div
-        className="absolute bottom-0 right-0 h-[30rem] w-[30rem] rounded-full bg-accent-cyan opacity-[0.05] blur-[90px]"
-        style={{ x: blobBX, y: blobBY }}
-      />
+      <div className="glow-blob glow-blob-b absolute bottom-0 right-0 h-[30rem] w-[30rem] rounded-full bg-accent-cyan opacity-[0.05] blur-[90px]" />
     </div>
   );
 }

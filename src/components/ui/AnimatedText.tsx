@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, type Variants } from "motion/react";
+import type { CSSProperties } from "react";
+import { useInView } from "@/hooks/useInView";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { cn } from "@/lib/utils";
 
@@ -13,11 +14,6 @@ interface AnimatedTextProps {
   className?: string;
 }
 
-const unitVariants: Variants = {
-  hidden: { y: "100%", opacity: 0 },
-  visible: { y: "0%", opacity: 1, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
-};
-
 export function AnimatedText({
   text,
   mode = "words",
@@ -28,55 +24,50 @@ export function AnimatedText({
 }: AnimatedTextProps) {
   const prefersReducedMotion = useReducedMotion();
   const stagger = staggerChildren ?? (mode === "chars" ? 0.035 : 0.08);
+  const { ref, inView } = useInView<HTMLSpanElement>({ threshold: 0.2 });
+  // `animation-delay` handles the "mount" wait on its own — nothing plays
+  // before scroll only when trigger is "inView".
+  const visible = trigger === "mount" ? true : inView;
 
   if (prefersReducedMotion) {
     // Structurally simpler fallback: plain opacity fade, no mask/stagger.
     return (
-      <motion.span
-        className={className}
-        initial={{ opacity: 0 }}
-        animate={trigger === "mount" ? { opacity: 1 } : undefined}
-        whileInView={trigger === "inView" ? { opacity: 1 } : undefined}
-        viewport={trigger === "inView" ? { once: true } : undefined}
-        transition={{ duration: 0.3, delay }}
+      <span
+        ref={trigger === "inView" ? ref : undefined}
+        className={cn("reveal-fade inline-block", className)}
+        data-visible={visible || undefined}
+        style={{ "--reveal-delay": `${delay}s` } as CSSProperties}
       >
         {text}
-      </motion.span>
+      </span>
     );
   }
 
   const units = mode === "words" ? text.split(" ") : text.split("");
 
-  const containerVariants: Variants = {
-    hidden: {},
-    visible: {
-      transition: { staggerChildren: stagger, delayChildren: delay },
-    },
-  };
-
-  const visibilityProps =
-    trigger === "mount"
-      ? { initial: "hidden", animate: "visible" }
-      : { initial: "hidden", whileInView: "visible", viewport: { once: true } };
-
   return (
-    <motion.span
+    <span
+      ref={trigger === "inView" ? ref : undefined}
       className={cn("inline-block", className)}
-      variants={containerVariants}
-      {...visibilityProps}
     >
       {units.map((unit, index) => (
-        <span
-          key={`${unit}-${index}`}
-          className="inline-block overflow-hidden"
-          style={{ verticalAlign: "top" }}
-        >
-          <motion.span className="inline-block" variants={unitVariants}>
-            {unit === " " ? " " : unit}
-            {mode === "words" && index < units.length - 1 ? " " : ""}
-          </motion.span>
+        <span key={`${unit}-${index}`} className="inline-block overflow-hidden align-top">
+          <span
+            className="reveal-unit inline-block"
+            data-visible={visible || undefined}
+            style={
+              {
+                "--i": index,
+                "--stagger": `${stagger}s`,
+                "--reveal-delay": `${delay}s`,
+              } as CSSProperties
+            }
+          >
+            {unit === " " ? " " : unit}
+            {mode === "words" && index < units.length - 1 ? " " : ""}
+          </span>
         </span>
       ))}
-    </motion.span>
+    </span>
   );
 }

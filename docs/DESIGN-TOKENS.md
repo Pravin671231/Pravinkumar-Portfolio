@@ -63,25 +63,25 @@ Tailwind's default 4px-base scale is used as-is (`1`–`96`). Section-level rhyt
 | `--radius-sm` | `0.5rem` | Tags, chips, small buttons |
 | `--radius-md` | `1rem` | Cards |
 | `--radius-lg` | `1.5rem` | Project preview panels, modals |
-| `--radius-full` | `9999px` | Pills, cursor dot, avatar |
+| `--radius-full` | `9999px` | Pills, avatar |
 | `--shadow-glow-sm` | `0 0 24px -8px var(--color-accent-blue)` at low alpha | Hover glow on cards/buttons |
 | `--shadow-glow-lg` | `0 0 120px -20px var(--color-accent-cyan)` at low alpha | Ambient section glow |
 
 ## 5. Motion (spec for later implementation — this doc does not animate)
 
-Durations/easings referenced by the FR sections in `SRS.md`; consumed by the actual Motion/GSAP code in M1/M2, **not** by `mock-ui/index.html`, which stays static.
+Durations/easings referenced by the FR sections in `SRS.md`; consumed by plain CSS transitions/`@keyframes` in `globals.css` (see SRS §2 "Animation approach" — no Motion/GSAP/Lenis, removed in the CSS animation simplification), **not** by `mock-ui/index.html`, which stays static.
 
 | Token | Value | Used by |
 |---|---|---|
 | `--ease-out-expo` | `cubic-bezier(0.16, 1, 0.3, 1)` | `ScrollReveal`, most entrance animations |
-| `--ease-in-out` | `cubic-bezier(0.65, 0, 0.35, 1)` | Scroll-indicator bob, cursor spring easing reference |
+| `--ease-in-out` | `cubic-bezier(0.65, 0, 0.35, 1)` | Scroll-indicator bob |
 | `--duration-fast` | `0.2s` | Hover micro-interactions (plain CSS tier) |
-| `--duration-base` | `0.4s` | Component-level Motion transitions |
+| `--duration-base` | `0.4s` | Mount fades (Navbar, Hero subtitle) |
 | `--duration-slow` | `0.8s` | Section entrance reveals |
 | `--duration-float` | `6s–10s` | `FloatingCode` decorative loops (SRS §5) |
 | `--stagger-word` | `0.08s` | `AnimatedText` word mode (Hero) |
 | `--stagger-char` | `0.03s–0.04s` | `AnimatedText` char mode (Contact) |
-| `--magnetic-max-pull` | `8px` (range 5–10px) | `MagneticButton` clamp |
+| ~~`--magnetic-max-pull`~~ | `8px` (range 5–10px) | **Unused** — `MagneticButton`'s pull effect was dropped in the CSS animation simplification; it's now a plain hover scale |
 | `--parallax-max-offset` | `15–20px` | `GlowBackground` mouse parallax clamp |
 
 ## 6. Breakpoints
@@ -90,9 +90,9 @@ Matches Tailwind defaults plus the SRS NFR-1 reference widths:
 
 | Token | Value | Notes |
 |---|---|---|
-| `--bp-mobile` | `375px` (design reference) | Vertical stack only, no pinned scroll, no custom cursor |
+| `--bp-mobile` | `375px` (design reference) | Vertical stack, no hover-only effects |
 | `--bp-tablet` | `768px` (`md:`) | Still vertical stack |
-| `--bp-desktop` | `1024px` (`lg:`) | Horizontal pinned project scroll and custom cursor activate here (SRS FR-4, FR-8) |
+| `--bp-desktop` | `1024px` (`lg:`) | Hover-only effects (`MagneticButton`, project card hover) activate on hover-capable pointers; horizontal pinned project scroll and the custom cursor were both removed (SRS FR-4, FR-8) |
 | `--bp-wide` | `1440px` (design reference) | Max content width reference for large displays |
 
 ## 7. Z-Index Layers
@@ -102,4 +102,3 @@ Matches Tailwind defaults plus the SRS NFR-1 reference widths:
 | `--z-base` | `0` | Page content |
 | `--z-nav` | `40` | Navbar |
 | `--z-command-palette` | `50` | Command palette modal/overlay |
-| `--z-cursor` | `60` | Custom cursor (always topmost, ignored by pointer-events) |

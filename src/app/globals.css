@@ -89,7 +89,18 @@ html[data-theme="light"] {
 
   --z-nav: 40;
   --z-command-palette: 50;
-  --z-cursor: 60;
+}
+
+html {
+  /* Replaces Lenis's inertial smooth scroll — native scroll-behavior for
+     anchor nav links, no library. */
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -106,14 +117,6 @@ body {
     linear-gradient(to right, color-mix(in srgb, var(--color-grid-line) 4%, transparent) 1px, transparent 1px),
     linear-gradient(to bottom, color-mix(in srgb, var(--color-grid-line) 4%, transparent) 1px, transparent 1px);
   background-size: 48px 48px;
-}
-
-/* Applied to <body> only while CustomCursor is active (desktop, motion
-   enabled) — never a blanket rule, so touch/reduced-motion users always
-   keep their native cursor. */
-.cursor-none-desktop,
-.cursor-none-desktop * {
-  cursor: none;
 }
 
 /* FloatingCode decorative glyphs — plain CSS loop, no JS animation library.
@@ -135,5 +138,160 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .animate-float {
     animation: none;
+  }
+}
+
+/* GlowBackground — a plain mousemove listener writes --glow-x/--glow-y
+   directly onto this element (see GlowBackground.tsx); the `0px` fallback
+   keeps SSR and the pre-interaction client render identical. */
+.glow-blob {
+  transition: transform 300ms ease-out;
+}
+
+.glow-blob-a {
+  transform: translate(var(--glow-x, 0px), var(--glow-y, 0px));
+}
+
+.glow-blob-b {
+  transform: translate(calc(var(--glow-x, 0px) * -1), calc(var(--glow-y, 0px) * -1));
+}
+
+/* AnimatedText — each unit starts hidden and only gets an animation-name
+   once `data-visible` is set (mount trigger: set from first render, so it
+   just plays on its own delay; inView trigger: set once useInView fires).
+   --i/--stagger/--reveal-delay are set inline per unit. */
+@keyframes textReveal {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.reveal-unit {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.reveal-unit[data-visible] {
+  animation: textReveal 0.5s var(--ease-out-expo) both;
+  animation-delay: calc(var(--reveal-delay, 0s) + var(--i, 0) * var(--stagger, 0.08s));
+}
+
+/* AnimatedText's reduced-motion fallback — plain fade, no stagger/mask. */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.reveal-fade {
+  opacity: 0;
+}
+
+.reveal-fade[data-visible] {
+  animation: fadeIn 0.3s ease-out both;
+  animation-delay: var(--reveal-delay, 0s);
+}
+
+/* Process — per-step fade/slide-up, replacing ScrollReveal's whileInView for
+   just this section since Process also needs the same visibility signal to
+   drive the timeline's fill (see Process.tsx). */
+.reveal-slide {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.8s var(--ease-out-expo),
+    transform 0.8s var(--ease-out-expo);
+}
+
+.reveal-slide[data-visible] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Navbar mount fade, Hero subtitle fade. */
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out both;
+}
+
+/* Hero scroll indicator — infinite bob loop. */
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.animate-bob {
+  animation: bob 1.6s var(--ease-in-out) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-bob {
+    animation: none;
+  }
+}
+
+/* MagneticButton — used to pull toward the cursor with spring physics
+   (Motion); simplified to a plain hover scale, scoped to devices that
+   actually support hover so a touch tap doesn't trigger a sticky "hover". */
+@media (hover: hover) and (pointer: fine) {
+  .magnetic-hover:hover {
+    transform: scale(1.05);
+  }
+}
+
+/* ProjectCard tag chips — stagger in on hover via --i set per tag. Scoped to
+   hover-capable devices; on touch they just stay at their rest opacity,
+   matching the original Motion behavior (whileHover never applied there). */
+.tag-chip {
+  display: inline-block;
+  opacity: 0.6;
+  transition:
+    opacity 200ms,
+    transform 200ms;
+  transition-delay: calc(var(--i, 0) * 50ms);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .tag-chip {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+/* ProjectPreview hover overlay + label. */
+.preview-overlay {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.preview-label {
+  display: inline-block;
+  transform: translateY(12px);
+  opacity: 0;
+  transition:
+    transform 200ms var(--ease-out-expo),
+    opacity 200ms var(--ease-out-expo);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .preview-overlay {
+    opacity: 1;
+  }
+
+  .group:hover .preview-label {
+    transform: translateY(0);
+    opacity: 1;
   }
 }

@@ -3,6 +3,7 @@
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 const LINKS = [
   { href: "#about", label: "About" },
@@ -18,6 +19,10 @@ const LINKS = [
 
 export function CommandPalette() {
   const [open, setOpen] = useState(false);
+  // Kept mounted for the closing transition, then actually unmounted once it
+  // finishes — a plain CSS opacity/scale transition needs the element to
+  // still be there while it plays.
+  const [rendered, setRendered] = useState(false);
   const [query, setQuery] = useState("");
   const router = useRouter();
 
@@ -39,7 +44,14 @@ export function CommandPalette() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  if (!open) return null;
+  // Adjust state during render (React's own pattern for this — see
+  // "You Might Not Need an Effect") rather than in a useEffect: idempotent
+  // once `rendered` catches up, so it can't loop.
+  if (open && !rendered) {
+    setRendered(true);
+  }
+
+  if (!rendered) return null;
 
   const filtered = LINKS.filter((link) =>
     link.label.toLowerCase().includes(query.toLowerCase()),
@@ -52,14 +64,23 @@ export function CommandPalette() {
 
   return (
     <div
-      className="fixed inset-0 flex items-start justify-center bg-bg/80 px-4 pt-[20vh]"
+      className={cn(
+        "fixed inset-0 flex items-start justify-center bg-bg/80 px-4 pt-[20vh] transition-opacity duration-150",
+        open ? "opacity-100" : "opacity-0",
+      )}
       style={{ zIndex: "var(--z-command-palette)" }}
       onClick={close}
+      onTransitionEnd={(e) => {
+        if (e.target === e.currentTarget && !open) setRendered(false);
+      }}
     >
       <div
         role="dialog"
         aria-modal="true"
-        className="w-full max-w-md rounded-lg border border-border bg-bg-elevated shadow-glow-sm"
+        className={cn(
+          "w-full max-w-md rounded-lg border border-border bg-bg-elevated shadow-glow-sm transition-[transform,opacity] duration-150",
+          open ? "scale-100 opacity-100" : "scale-95 opacity-0",
+        )}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center gap-3 border-b border-border px-4 py-3">
