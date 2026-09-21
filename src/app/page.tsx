@@ -3,10 +3,7 @@ import { About } from "@/components/sections/About";
 import { Projects } from "@/components/sections/Projects";
 import { Stack } from "@/components/sections/Stack";
 import { Process } from "@/components/sections/Process";
-import { Github } from "@/components/sections/Github";
-import { Journey } from "@/components/sections/Journey";
 import { Certifications } from "@/components/sections/Certifications";
-import { Testimonials } from "@/components/sections/Testimonials";
 import { Contact } from "@/components/sections/Contact";
 
 export default function Home() {
@@ -17,10 +14,10 @@ export default function Home() {
       <Projects />
       <Stack />
       <Process />
-      <Github />
-      <Journey />
+      {/* <Github /> */}
+      {/* <Journey /> */}
       <Certifications />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <Contact />
     </main>
   );

@@ -16,9 +16,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const TITLE = "Pravin K — Full Stack Developer";
+const TITLE = "Pravinkumar K — Full Stack Developer";
 const DESCRIPTION =
-  "Portfolio of Pravin K, a full stack developer building fast, thoughtful products with Next.js, TypeScript & Node.js.";
+  "Portfolio of Pravinkumar K, a full stack developer building fast, thoughtful products with Next.js, TypeScript & Node.js.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://pravin671231.dev"),
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
     url: "/",
-    siteName: "Pravin K — Portfolio",
+    siteName: "Pravinkumar K — Portfolio",
     type: "website",
   },
   twitter: {

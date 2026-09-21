@@ -16,19 +16,30 @@ export function Hero() {
       <FloatingCode />
 
       <div className="relative max-w-3xl text-center">
-        <p className="mb-6 font-mono text-xs uppercase tracking-[0.08em] text-accent-blue">
-          Available for work
-        </p>
+        <div className="mb-6 flex items-center justify-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-green-400 shadow-[0_0_10px_#4ade80] animate-pulse" />
+          <p className=" font-mono text-xs uppercase tracking-[0.08em] text-accent-blue">
+            Open to Full Stack / Frontend Developer roles
+          </p>
+        </div>
+
         <h1 className="text-display font-semibold tracking-tight">
-          <AnimatedText text="Hi, I'm Pravin." mode="words" trigger="mount" />
+          <AnimatedText
+            text="Hi, I'm Pravin."
+            mode="words"
+            trigger="mount"
+            className="tracking-wider"
+          />
         </h1>
         <p
           className="animate-fade-in mx-auto mt-6 max-w-xl text-lg text-text-muted md:text-xl"
           style={{ animationDelay: prefersReducedMotion ? "0.1s" : "0.7s" }}
         >
-          Full Stack Developer building fast, thoughtful products with Next.js, TypeScript &amp; Node.js.
+          Full Stack Developer building fast, thoughtful products with Next.js,
+          TypeScript &amp; Node.js.
         </p>
         <div className="mt-10 flex items-center justify-center gap-4">
+        
           <MagneticButton>
             <a
               href="#projects"
@@ -37,6 +48,7 @@ export function Hero() {
               View My Work
             </a>
           </MagneticButton>
+
           <a
             href="#contact"
             className="rounded-sm border border-border px-6 py-3 text-sm font-medium transition-colors hover:border-accent-blue hover:text-accent-blue"
@@ -47,7 +59,9 @@ export function Hero() {
       </div>
 
       <div className="animate-bob absolute bottom-10 flex flex-col items-center text-text-faint">
-        <span className="mb-2 font-mono text-[10px] uppercase tracking-[0.08em]">Scroll</span>
+        <span className="mb-2 font-mono text-[10px] uppercase tracking-[0.08em]">
+          Scroll
+        </span>
         <ChevronDown size={16} aria-hidden />
       </div>
     </section>

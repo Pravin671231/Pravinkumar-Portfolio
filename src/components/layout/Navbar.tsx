@@ -1,9 +1,8 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useTheme } from "@/context/ThemeContext";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const NAV_LINKS = [
   { href: "#about", label: "About" },
@@ -14,7 +13,7 @@ const NAV_LINKS = [
 ];
 
 export function Navbar() {
-  const { theme, toggleTheme } = useTheme();
+  // const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -35,7 +34,9 @@ export function Navbar() {
       style={{ zIndex: "var(--z-nav)" }}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-8">
-        <span className="font-mono text-sm tracking-widest">PRAVIN K</span>
+        <Link href="/" className="font-mono text-sm tracking-widest">
+          PRAVINKUMAR K
+        </Link>
 
         <ul className="hidden items-center gap-8 text-sm text-text-muted md:flex">
           {NAV_LINKS.map((link) => (
@@ -47,7 +48,7 @@ export function Navbar() {
           ))}
         </ul>
 
-        <div className="flex items-center gap-3">
+        {/* <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={toggleTheme}
@@ -62,7 +63,7 @@ export function Navbar() {
           >
             Let&apos;s Talk
           </a>
-        </div>
+        </div> */}
       </nav>
     </header>
   );

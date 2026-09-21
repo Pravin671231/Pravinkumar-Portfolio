@@ -1,13 +1,16 @@
 import type { CSSProperties } from "react";
-import Link from "next/link";
 import type { Project } from "@/data/projects";
 import { ProjectPreview } from "./ProjectPreview";
+import ProofOfWork from "./ProofOfWork";
 
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
+    <>
     <div className="group block overflow-hidden rounded-lg border border-border bg-bg-elevated">
-      <Link href={`/projects/${project.slug}`} className="block">
-        <ProjectPreview project={project} />
+      {/* <Link href={project.liveUrl} className="block" target="_blank" rel="noopener noreferrer">
+        inside the link, we can have the preview and the content, but since the preview has its own links, we might want to avoid nesting links. So we can remove this Link wrapper and just have the ProjectPreview and content separately.
+      </Link> */}
+      <ProjectPreview project={project} />
         <div className="p-6">
           <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.08em] text-text-faint">
             Project {String(index + 1).padStart(2, "0")}
@@ -27,8 +30,11 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
               </span>
             ))}
           </div>
+          
         </div>
-      </Link>
     </div>
+        {project.proofofwork && <ProofOfWork />}
+
+</>
   );
 }

@@ -17,19 +17,20 @@ export interface Project {
     stack: string[];
     result: string;
   };
+  proofofwork?: boolean;
 }
 
 export const projects: Project[] = [
   {
     slug: "techcart",
-    title: "TechCart",
+    title: "TechCart — E-commerce Web Application",
     tagline: "Full Stack E-Commerce",
     description:
-      "Placeholder description — replace with a real project summary once content is finalized.",
-    tags: ["Next.js", "TypeScript", "MongoDB"],
-    coverImage: "/projects/techcart-cover.svg",
-    liveUrl: "#",
-    repoUrl: "#",
+      "Built a full-stack e-commerce application focused on providing a responsive and reliable shopping experience. Implemented product browsing, dynamic filtering, server-side search, product management, secure file uploads, API integration, and flexible MongoDB data modeling. Developed reusable frontend components and RESTful APIs while focusing on clean code, responsive UI, maintainability, and scalable application architecture.. ",
+    tags: ["React", "Node.js","Next.js", "TypeScript", "Express.js", "MongoDB", "Tailwind CSS"],
+    coverImage: "/projects/techcart-cover.png",
+    liveUrl: "https://tech-cart-buyer-app.vercel.app",
+    repoUrl: "https://github.com/Pravin671231/TechCart",
     featured: true,
     caseStudy: {
       problem: "Placeholder — the problem this project solved.",
@@ -38,41 +39,19 @@ export const projects: Project[] = [
       stack: ["Next.js", "TypeScript", "MongoDB"],
       result: "Placeholder — the outcome/impact.",
     },
+    proofofwork: true,
   },
   {
     slug: "movienest",
-    title: "MovieNest",
+    title: "MovieNest — Movie Discovery Application",
     tagline: "Movie Discovery Platform",
     description:
-      "Placeholder description — replace with a real project summary once content is finalized.",
-    tags: ["React", "Node.js"],
-    coverImage: "/projects/movienest-cover.svg",
-    liveUrl: "#",
-    repoUrl: "#",
+      "A responsive movie discovery application built with React.js and TypeScript, featuring reusable API hooks, responsive layouts, and clean handling of loading, error, and movie data states using the TMDb API.",
+    tags: ["React", "Tailwind CSS", "JavaScript", "TMDB API"],
+    coverImage: "/projects/movienest-cover.png",
+    liveUrl: "https://im-db-movie.netlify.app/",
+    repoUrl: "https://github.com/Pravin671231/movies",
     featured: true,
-  },
-  {
-    slug: "phoneshop",
-    title: "PhoneShop",
-    tagline: "Mobile Retail Storefront",
-    description:
-      "Placeholder description — replace with a real project summary once content is finalized.",
-    tags: ["Next.js", "Stripe"],
-    coverImage: "/projects/phoneshop-cover.svg",
-    liveUrl: "#",
-    repoUrl: "#",
-    featured: true,
-  },
-  {
-    slug: "leafflow",
-    title: "LeafFlow",
-    tagline: "Issue-to-PR Workflow Tool",
-    description:
-      "Placeholder description — replace with a real project summary once content is finalized.",
-    tags: ["TypeScript", "Node.js"],
-    coverImage: "/projects/leafflow-cover.svg",
-    liveUrl: "#",
-    repoUrl: "#",
-    featured: true,
+    proofofwork: false,
   },
 ];

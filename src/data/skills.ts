@@ -1,21 +1,57 @@
-// TODO: replace with real skill set once finalized.
-
-export interface StackNode {
-  id: string;
-  name: string;
-  category: "frontend" | "backend" | "database" | "tooling" | "other";
-  icon: string;
-  /** Reserved for the Phase 2 SVG connection-diagram treatment; unused in MVP. */
-  connectsTo?: string[];
-}
-
-export const skills: StackNode[] = [
-  { id: "typescript", name: "TypeScript", category: "frontend", icon: "code-2" },
-  { id: "react", name: "React", category: "frontend", icon: "atom" },
-  { id: "nextjs", name: "Next.js", category: "frontend", icon: "layers" },
-  { id: "nodejs", name: "Node.js", category: "backend", icon: "server" },
-  { id: "mongodb", name: "MongoDB", category: "database", icon: "database" },
-  { id: "postgresql", name: "PostgreSQL", category: "database", icon: "database" },
-  { id: "docker", name: "Docker", category: "tooling", icon: "container" },
-  { id: "tailwind", name: "Tailwind CSS", category: "tooling", icon: "palette" },
+export const skills = [
+  {
+    id: "frontend",
+    name: "Frontend",
+    technologies: [
+      "TypeScript",
+      "JavaScript (ES6+)",
+      "React.js",
+      "Next.js",
+      "HTML5",
+      "CSS3",
+      "Tailwind CSS",
+      "Redux Toolkit",
+      "RTK Query",
+      "Context API",
+    ],
+  },
+  {
+    id: "backend",
+    name: "Backend & APIs",
+    technologies: [
+      "Node.js",
+      "Express.js",
+      "REST APIs",
+      "Zod",
+    ],
+  },
+  {
+    id: "database",
+    name: "Database",
+    technologies: [
+      "MongoDB",
+      "Mongoose",
+      "MongoDB Atlas",
+    ],
+  },
+  {
+    id: "tools",
+    name: "Tools & Infrastructure",
+    technologies: [
+      "Git",
+      "GitHub",
+      "Postman",
+      "Vercel",
+      "Render",
+      "Docker",
+      "Docker Compose",
+      "GitHub Actions",
+      "CI/CD",
+      "Cloudflare R2",
+      "Vitest",
+      "React Testing Library",
+      "MSW",
+      "Supertest",
+    ],
+  },
 ];
