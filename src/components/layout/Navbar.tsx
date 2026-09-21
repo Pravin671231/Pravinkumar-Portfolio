@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const NAV_LINKS = [
   { href: "#about", label: "About" },
@@ -33,7 +34,9 @@ export function Navbar() {
       style={{ zIndex: "var(--z-nav)" }}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-8">
-        <span className="font-mono text-sm tracking-widest">PRAVINKUMAR K</span>
+        <Link href="/" className="font-mono text-sm tracking-widest">
+          PRAVINKUMAR K
+        </Link>
 
         <ul className="hidden items-center gap-8 text-sm text-text-muted md:flex">
           {NAV_LINKS.map((link) => (
