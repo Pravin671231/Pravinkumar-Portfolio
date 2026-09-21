@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "motion/react";
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTheme } from "@/context/ThemeContext";
@@ -26,12 +25,9 @@ export function Navbar() {
   }, []);
 
   return (
-    <motion.header
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
+    <header
       className={cn(
-        "fixed inset-x-0 top-0 border-b transition-colors",
+        "animate-fade-in fixed inset-x-0 top-0 border-b transition-colors",
         scrolled
           ? "border-border bg-bg/70 backdrop-blur-md"
           : "border-transparent bg-transparent",
@@ -68,6 +64,6 @@ export function Navbar() {
           </a>
         </div>
       </nav>
-    </motion.header>
+    </header>
   );
 }

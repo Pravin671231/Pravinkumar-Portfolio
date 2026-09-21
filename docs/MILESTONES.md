@@ -48,4 +48,6 @@ These are written as ready-to-create GitHub Milestone entries for `Pravin671231/
 
 **Description:** Layer in the bespoke motion treatment for every section listed as a stub in the SRS §5 — Navbar entrance/shrink, About card mouse-tilt, Stack SVG connection diagram, Journey timeline unification, Certifications hover treatment, Testimonials carousel, Command Palette polish, route page transitions, and the real (authenticated) GitHub contribution-calendar data. Left as a placeholder milestone — break into issues once M0–M3 ship.
 
+**Note:** a later maintenance PR removed Motion/GSAP/Lenis in favor of plain CSS animation (see `docs/SRS.md` §2 "Animation approach"). Every bespoke treatment above should be scoped as CSS-only (transitions/`@keyframes`/`IntersectionObserver`) when it's actually tackled — GSAP's `stroke-dashoffset` draw-in and Motion's `AnimatePresence` are no longer available.
+
 **Target date:** TBD

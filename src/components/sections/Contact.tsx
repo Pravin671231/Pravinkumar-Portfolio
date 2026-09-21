@@ -3,11 +3,8 @@
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { GlowBackground } from "@/components/ui/GlowBackground";
 import { MagneticButton } from "@/components/ui/MagneticButton";
-import { useCursor } from "@/context/CursorContext";
 
 export function Contact() {
-  const { setCursor } = useCursor();
-
   return (
     <section
       id="contact"
@@ -26,8 +23,6 @@ export function Contact() {
         <MagneticButton className="mt-10">
           <a
             href="mailto:pravinkumar671231@gmail.com"
-            onMouseEnter={() => setCursor("talk")}
-            onMouseLeave={() => setCursor("default")}
             className="inline-flex items-center rounded-sm bg-text px-8 py-4 text-sm font-medium text-bg transition-opacity hover:opacity-90"
           >
             Let&apos;s Talk

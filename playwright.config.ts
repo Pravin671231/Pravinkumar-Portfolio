@@ -25,11 +25,6 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"], reducedMotion: "reduce" },
       grep: /@opt-out/,
     },
-    {
-      name: "mobile",
-      use: { ...devices["Pixel 7"] },
-      grep: /@opt-out/,
-    },
   ],
   webServer: {
     command: "npm run build && npm run start",

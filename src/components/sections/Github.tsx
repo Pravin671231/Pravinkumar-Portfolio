@@ -1,9 +1,7 @@
 "use client";
 
-import { animate, motion, useInView, useMotionValue, type Variants } from "motion/react";
-import { useEffect, useRef, useState } from "react";
-import { useCursor } from "@/context/CursorContext";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useEffect, useState } from "react";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { fetchGithubStats } from "@/lib/github";
 
 const GITHUB_USER = "Pravin671231";
@@ -27,40 +25,10 @@ function seededGrid(seed: number, count: number): number[] {
 
 const GRID_CELLS = seededGrid(42, 140);
 
-const gridContainerVariants: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.008 } },
-};
-
-const cellVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.6 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.2 } },
-};
-
-function CountUp({ value, label }: { value: number; label: string }) {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.5 });
-  const motionValue = useMotionValue(0);
-  const prefersReducedMotion = useReducedMotion();
-  const [display, setDisplay] = useState("00");
-
-  useEffect(() => {
-    if (!inView || prefersReducedMotion) return;
-    const controls = animate(motionValue, value, {
-      duration: 1.2,
-      ease: "easeOut",
-      onUpdate: (v) => setDisplay(String(Math.round(v)).padStart(2, "0")),
-    });
-    return () => controls.stop();
-  }, [inView, value, motionValue, prefersReducedMotion]);
-
-  const shown = inView && prefersReducedMotion ? String(value).padStart(2, "0") : display;
-
+function Stat({ value, label }: { value: number; label: string }) {
   return (
     <div>
-      <p ref={ref} className="font-mono text-4xl font-semibold">
-        {shown}
-      </p>
+      <p className="font-mono text-4xl font-semibold">{String(value).padStart(2, "0")}</p>
       <p className="mt-2 text-sm text-text-muted">{label}</p>
     </div>
   );
@@ -68,8 +36,6 @@ function CountUp({ value, label }: { value: number; label: string }) {
 
 export function Github() {
   const [stats, setStats] = useState({ repos: 0, followers: 0, totalStars: 0 });
-  const { setCursor } = useCursor();
-  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     fetchGithubStats().then(setStats);
@@ -80,40 +46,26 @@ export function Github() {
       <div className="mx-auto max-w-4xl text-center">
         <p className="mb-4 font-mono text-xs uppercase tracking-[0.08em] text-accent-blue">GitHub</p>
         <h2 className="mb-12 text-h1 font-semibold">
-          <a
-            href={`https://github.com/${GITHUB_USER}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            onMouseEnter={() => setCursor("code")}
-            onMouseLeave={() => setCursor("default")}
-          >
+          <a href={`https://github.com/${GITHUB_USER}`} target="_blank" rel="noopener noreferrer">
             Open Source Activity
           </a>
         </h2>
 
         <div className="mb-12 grid grid-cols-3 gap-6">
-          <CountUp value={stats.repos} label="Repositories" />
-          <CountUp value={stats.followers} label="Followers" />
-          <CountUp value={stats.totalStars} label="Stars" />
+          <Stat value={stats.repos} label="Repositories" />
+          <Stat value={stats.followers} label="Followers" />
+          <Stat value={stats.totalStars} label="Stars" />
         </div>
 
-        <motion.div
-          className="mx-auto grid max-w-xl gap-1"
-          style={{ gridTemplateColumns: "repeat(20, minmax(0,1fr))" }}
-          initial={prefersReducedMotion ? "visible" : "hidden"}
-          whileInView={prefersReducedMotion ? undefined : "visible"}
-          viewport={{ once: true, amount: 0.3 }}
-          variants={gridContainerVariants}
-        >
+        <ScrollReveal className="mx-auto grid max-w-xl grid-cols-20 gap-1">
           {GRID_CELLS.map((intensity, i) => (
-            <motion.div
+            <div
               key={i}
-              variants={cellVariants}
               className="aspect-square rounded-sm bg-accent-blue"
               style={{ opacity: 0.1 + intensity * 0.6 }}
             />
           ))}
-        </motion.div>
+        </ScrollReveal>
         <p className="mt-4 font-mono text-xs text-text-faint">
           Mock activity grid — real contribution data requires the authenticated GitHub GraphQL API
           (Phase 2).

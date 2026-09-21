@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider, THEME_INIT_SCRIPT } from "@/context/ThemeContext";
-import { CursorProvider } from "@/context/CursorContext";
-import { SmoothScrollProvider } from "@/components/layout/SmoothScrollProvider";
-import { CustomCursor } from "@/components/ui/CustomCursor";
 import { CommandPalette } from "@/components/ui/CommandPalette";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -56,15 +53,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="flex min-h-full flex-col">
         <ThemeProvider>
-          <CursorProvider>
-            <SmoothScrollProvider>
-              <CustomCursor />
-              <CommandPalette />
-              <Navbar />
-              {children}
-              <Footer />
-            </SmoothScrollProvider>
-          </CursorProvider>
+          <CommandPalette />
+          <Navbar />
+          {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

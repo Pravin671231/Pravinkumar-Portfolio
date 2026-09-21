@@ -1,9 +1,9 @@
 "use client";
 
-import { motion } from "motion/react";
 import type { ReactNode } from "react";
+import { useInView } from "@/hooks/useInView";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { EASE_OUT_EXPO, DURATION_SLOW } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -17,29 +17,30 @@ export function ScrollReveal({
   children,
   delay = 0,
   y = 24,
-  duration = DURATION_SLOW,
+  duration,
   className,
 }: ScrollRevealProps) {
   const prefersReducedMotion = useReducedMotion();
+  const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.2 });
 
   if (prefersReducedMotion) {
-    // Skip animation entirely — render already in final state, no flash.
-    return (
-      <motion.div className={className} initial={false}>
-        {children}
-      </motion.div>
-    );
+    // Skip animation entirely — render already in final state, no flash, and
+    // no need to wait on scroll for reduced-motion users.
+    return <div className={className}>{children}</div>;
   }
 
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration, delay, ease: EASE_OUT_EXPO }}
+    <div
+      ref={ref}
+      className={cn("transition-[opacity,transform] ease-out-expo", className)}
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? "translateY(0)" : `translateY(${y}px)`,
+        transitionDuration: duration !== undefined ? `${duration}s` : "var(--duration-slow)",
+        transitionDelay: `${delay}s`,
+      }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
