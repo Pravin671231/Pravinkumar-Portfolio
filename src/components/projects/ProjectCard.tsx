@@ -1,5 +1,4 @@
 import type { CSSProperties } from "react";
-import Link from "next/link";
 import type { Project } from "@/data/projects";
 import { ProjectPreview } from "./ProjectPreview";
 import ProofOfWork from "./ProofOfWork";

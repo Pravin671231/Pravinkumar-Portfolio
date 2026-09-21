@@ -7,7 +7,7 @@ export default function ProofOfWork() {
         {/* Header */}
         <div className="mb-10">
           <p className="mb-4 font-mono text-xs uppercase tracking-widest text-neutral-400">
-            // case studies — proof of work
+            {"//"} case studies — proof of work
           </p>
         </div>
 
@@ -20,7 +20,7 @@ export default function ProofOfWork() {
             >
               {/* Case Label */}
               <p className="font-mono text-xs uppercase tracking-wider text-neutral-400">
-                CASE // {study.id}
+                CASE {"//"} {study.id}
               </p>
 
               {/* Title */}

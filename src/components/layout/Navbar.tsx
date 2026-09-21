@@ -1,8 +1,6 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useTheme } from "@/context/ThemeContext";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
