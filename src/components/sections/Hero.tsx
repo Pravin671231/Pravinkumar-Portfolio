@@ -39,12 +39,7 @@ export function Hero() {
           TypeScript &amp; Node.js.
         </p>
         <div className="mt-10 flex items-center justify-center gap-4">
-          <a
-            href="#resume"
-            className="rounded-sm border border-border px-6 py-3 text-sm font-medium transition-colors hover:border-accent-blue hover:text-accent-blue"
-          >
-            Download Resume
-          </a>
+        
           <MagneticButton>
             <a
               href="#projects"
