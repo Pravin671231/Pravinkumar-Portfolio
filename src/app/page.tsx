@@ -18,9 +18,9 @@ export default function Home() {
       <Stack />
       <Process />
       {/* <Github /> */}
-      <Journey />
+      {/* <Journey /> */}
       <Certifications />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <Contact />
     </main>
   );
