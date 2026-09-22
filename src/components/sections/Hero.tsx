@@ -11,14 +11,14 @@ export function Hero() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-(--space-container-x)">
+    <section className="relative flex h-dvh flex-col items-center justify-center overflow-hidden px-(--space-container-x)">
       <GlowBackground />
       <FloatingCode />
 
       <div className="relative max-w-3xl text-center">
         <div className="mb-6 flex items-center justify-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-green-400 shadow-[0_0_10px_#4ade80] animate-pulse" />
-          <p className=" font-mono text-xs uppercase tracking-[0.08em] text-accent-blue">
+          <span className="hidden md:flex h-2 w-2 rounded-full bg-green-400 shadow-[0_0_10px_#4ade80] animate-pulse" />
+          <p className=" font-mono text-sm uppercase tracking-[0.08em] text-accent-blue">
             Open to Full Stack / Frontend Developer roles
           </p>
         </div>
