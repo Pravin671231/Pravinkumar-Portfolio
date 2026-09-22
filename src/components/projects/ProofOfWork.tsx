@@ -56,12 +56,12 @@ export default function ProofOfWork() {
                 {/* Problem */}
                 <div>
                   <p className="font-mono text-xs uppercase tracking-widest text-neutral-400">
-                    Problem
+                    Challenge
                   </p>
                 </div>
 
                 <p className="max-w-3xl text-sm leading-7 text-neutral-600">
-                  {study.problem}
+                  {study.Challenge}
                 </p>
               </div>
 
@@ -69,12 +69,12 @@ export default function ProofOfWork() {
               <div className="mt-8 grid gap-10 md:grid-cols-[140px_1fr]">
                 <div>
                   <p className="font-mono text-xs uppercase tracking-widest text-neutral-400">
-                    Action
+                    Implementation
                   </p>
                 </div>
 
                 <ul className="max-w-3xl space-y-4">
-                  {study.action.map((item) => (
+                  {study.Implementation.map((item) => (
                     <li
                       key={item}
                       className="text-sm leading-7 text-neutral-600"
@@ -90,7 +90,7 @@ export default function ProofOfWork() {
               <div className="mt-10 grid gap-6 md:grid-cols-[140px_1fr]">
                 <div>
                   <p className="font-mono text-xs uppercase tracking-[0.2em] text-neutral-400">
-                    Result
+                    Outcome
                   </p>
                 </div>
 
@@ -102,7 +102,7 @@ export default function ProofOfWork() {
                     <span className="mt-0.5 ms-2 text-sm text-neutral-900">✓</span>
 
                     <p className="max-w-3xl text-sm font-medium leading-7 text-neutral-800">
-                      {study.result}
+                      {study.Outcome}
                     </p>
                   </div>
                 </div>
