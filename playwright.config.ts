@@ -25,6 +25,26 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"], reducedMotion: "reduce" },
       grep: /@opt-out/,
     },
+    ...[
+      { name: "mobile-375", viewport: { width: 375, height: 667 } },
+      { name: "mobile-390", viewport: { width: 390, height: 844 } },
+    ].map(({ name, viewport }) => ({
+      name,
+      use: {
+        ...devices["Pixel 7"],
+        viewport,
+      },
+      grep: /@mobile/,
+    })),
+    {
+      name: "mobile-reduced-motion",
+      use: {
+        ...devices["Pixel 7"],
+        viewport: { width: 375, height: 667 },
+        reducedMotion: "reduce",
+      },
+      grep: /@mobile/,
+    },
   ],
   webServer: {
     command: "npm run build && npm run start",

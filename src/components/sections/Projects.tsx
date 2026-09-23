@@ -1,6 +1,7 @@
 "use client";
 
 import { ProjectCard } from "@/components/projects/ProjectCard";
+import ProofOfWork from "@/components/projects/ProofOfWork";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { projects } from "@/data/projects";
 
@@ -18,9 +19,12 @@ export function Projects() {
 
         <div className="grid gap-8">
           {projects.map((project, i) => (
-            <ScrollReveal key={project.slug} delay={Math.min(i * 0.1, 0.3)}>
-              <ProjectCard project={project} index={i} />
-            </ScrollReveal>
+            <div key={project.slug}>
+              <ScrollReveal delay={Math.min(i * 0.1, 0.3)}>
+                <ProjectCard project={project} index={i} />
+              </ScrollReveal>
+              {project.proofofwork && <ProofOfWork />}
+            </div>
           ))}
         </div>
       </div>
