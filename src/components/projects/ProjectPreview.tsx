@@ -15,13 +15,12 @@ export function ProjectPreview({ project }: { project: Project }) {
         className="object-fill transition-transform duration-300 group-hover:scale-105"
       />
       <div className="preview-overlay absolute inset-0 flex items-center justify-center bg-bg/70">
-        <span className="preview-label font-mono  uppercase tracking-[0.08em] text-text">
-          <div className="mb-12 flex gap-4">
+          <div className="preview-label flex items-center justify-center gap-3 px-3 font-mono uppercase tracking-[0.08em] text-text">
             <a
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-sm bg-text px-5 py-2.5 text-sm font-medium text-bg"
+              className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-sm bg-text px-5 py-2.5 text-sm font-medium text-bg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-blue"
             >
               Live Site
             </a>
@@ -29,12 +28,11 @@ export function ProjectPreview({ project }: { project: Project }) {
               href={project.repoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-sm border px-5 py-2.5 text-sm font-medium"
+              className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-sm border px-5 py-2.5 text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-blue"
             >
               Source
             </a>
           </div>
-        </span>
       </div>
     </div>
   );

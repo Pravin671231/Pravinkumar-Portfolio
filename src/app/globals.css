@@ -65,7 +65,7 @@ html[data-theme="light"] {
   --text-display--line-height: 1.05;
   --text-h1: clamp(2rem, 4vw, 3rem);
   --text-h1--line-height: 1.1;
-  --text-h2: 1.5rem;
+  --text-h2: clamp(1.25rem, 1rem + 1vw, 1.5rem);
   --text-h2--line-height: 1.2;
   --text-body: 1rem;
   --text-body--line-height: 1.6;
@@ -272,26 +272,42 @@ body {
 
 /* ProjectPreview hover overlay + label. */
 .preview-overlay {
-  opacity: 0;
+  opacity: 1;
   transition: opacity 200ms;
 }
 
 .preview-label {
-  display: inline-block;
-  transform: translateY(12px);
-  opacity: 0;
+  transform: translateY(0);
+  opacity: 1;
   transition:
     transform 200ms var(--ease-out-expo),
     opacity 200ms var(--ease-out-expo);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .group:hover .preview-overlay {
-    opacity: 1;
+@media (min-width: 768px) and (hover: hover) and (pointer: fine) {
+  .preview-overlay {
+    opacity: 0;
+    pointer-events: none;
   }
 
-  .group:hover .preview-label {
+  .preview-label {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  .group:hover .preview-overlay,
+  .group:focus-within .preview-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .group:hover .preview-label,
+  .group:focus-within .preview-label {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+#projects .tag-chip {
+  opacity: 1;
 }
