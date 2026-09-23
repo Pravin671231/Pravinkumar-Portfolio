@@ -12,10 +12,10 @@ export function Projects() {
       className="relative px-(--space-container-x) py-(--space-section-y)"
     >
       <div className="mx-auto max-w-6xl">
-        <p className="mb-4 font-mono text-xs uppercase tracking-[0.08em] text-accent-blue">
+        <p className="mb-4 font-mono text-xs uppercase tracking-[0.08em] text-text-muted">
           Selected Work
         </p>
-        <h2 className="mb-12 text-h1 font-semibold">Projects</h2>
+        <h2 className="mb-6 text-h1 font-semibold md:mb-12">Projects</h2>
 
         <div className="grid gap-8">
           {projects.map((project, i) => (

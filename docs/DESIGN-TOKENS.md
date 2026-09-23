@@ -41,7 +41,7 @@ Glow blobs use `--color-accent-blue`/`--color-accent-cyan` as `radial-gradient` 
 | `--font-mono` | `"Geist Mono", "JetBrains Mono", monospace` | Code snippets, `FloatingCode`, tags, stat labels |
 | `--text-display` | `clamp(2.5rem, 6vw, 5.5rem)` / weight 600 / line-height 1.05 | Hero headline, Contact "LET'S BUILD IT." |
 | `--text-h1` | `clamp(2rem, 4vw, 3rem)` / weight 600 / line-height 1.1 | Section headings |
-| `--text-h2` | `1.5rem` / weight 600 / line-height 1.2 | Card titles, sub-headings |
+| `--text-h2` | `clamp(1.25rem, 1rem + 1vw, 1.5rem)` / weight 600 / line-height 1.2 | Responsive card titles and sub-headings (20–24px at the default root size) |
 | `--text-body` | `1rem` / weight 400 / line-height 1.6 | Paragraph copy |
 | `--text-label` | `0.8125rem` / weight 500 / letter-spacing 0.04em / uppercase | Eyebrow labels ("PROJECT 01", "ABOUT") |
 | `--text-caption` | `0.75rem` / weight 400 | Meta text, footnotes |
