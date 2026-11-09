@@ -5,10 +5,12 @@ import { Stack } from "@/components/sections/Stack";
 import { Process } from "@/components/sections/Process";
 import { Certifications } from "@/components/sections/Certifications";
 import { Contact } from "@/components/sections/Contact";
+import { NetworkBackground } from "@/components/layout/NetworkBackground";
 
 export default function Home() {
   return (
-    <main>
+     <main className="relative min-h-screen text-white">
+      <NetworkBackground />
       <Hero />
       <About />
       <Projects />

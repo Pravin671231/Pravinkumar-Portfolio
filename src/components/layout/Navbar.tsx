@@ -13,7 +13,6 @@ const NAV_LINKS = [
 ];
 
 export function Navbar() {
-  // const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -26,44 +25,35 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "animate-fade-in fixed inset-x-0 top-0 border-b transition-colors",
+        "animate-fade-in fixed inset-x-0 top-0 border-b transition-all duration-300",
         scrolled
-          ? "border-border bg-bg/70 backdrop-blur-md"
+          ? "border-sky-400/15 bg-[#040b12]/80 shadow-[0_4px_30px_rgba(0,0,0,0.4)] backdrop-blur-md"
           : "border-transparent bg-transparent",
       )}
       style={{ zIndex: "var(--z-nav)" }}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-8">
-        <Link href="/" className="font-mono text-sm tracking-widest">
-          PRAVINKUMAR K
+        {/* Brand Logo with subtle cyan accent */}
+        <Link
+          href="/"
+          className="font-mono text-sm font-medium tracking-widest text-slate-100 transition-colors hover:text-sky-400"
+        >
+          PRAVINKUMAR <span className="text-sky-400">K</span>
         </Link>
 
-        <ul className="hidden items-center gap-8 text-sm text-text-muted md:flex">
+        {/* Navigation Links */}
+        <ul className="hidden items-center gap-8 text-sm text-slate-400 md:flex">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
-              <a href={link.href} className="transition-colors hover:text-text">
+              <a
+                href={link.href}
+                className="relative py-1 transition-colors hover:text-sky-500 font-bold"
+              >
                 {link.label}
               </a>
             </li>
           ))}
         </ul>
-
-        {/* <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={toggleTheme}
-            aria-label="Toggle dark and light mode"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-text-muted transition-colors hover:border-accent-blue hover:text-text"
-          >
-            {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
-          </button>
-          <a
-            href="#contact"
-            className="hidden rounded-sm border border-border px-4 py-2 text-sm transition-colors hover:border-accent-blue hover:text-accent-blue md:inline-flex"
-          >
-            Let&apos;s Talk
-          </a>
-        </div> */}
       </nav>
     </header>
   );

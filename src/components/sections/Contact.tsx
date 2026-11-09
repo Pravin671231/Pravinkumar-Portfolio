@@ -3,9 +3,7 @@
 import {
   ArrowUpRight,
   FileText,
-  
   Globe,
-  
   Mail,
 } from "lucide-react";
 import { AnimatedText } from "@/components/ui/AnimatedText";
@@ -60,22 +58,22 @@ export function Contact() {
 
         {/* Buttons */}
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-          {/* Email */}
+          {/* Email - Primary Luminous Cyan */}
           <MagneticButton>
             <a
               href="mailto:pravinkumar671231@gmail.com"
               className="
                 group inline-flex items-center gap-2
                 rounded-sm
-                bg-text
+                bg-sky-400
                 px-6 py-3.5
                 text-sm font-medium
-                text-bg
+                text-[#040b12]
+                shadow-[0_0_20px_rgba(56,189,248,0.35)]
                 transition-all duration-300
                 hover:-translate-y-0.5
-                hover:opacity-90
-                hover:shadow-lg
-                hover:shadow-text/10
+                hover:bg-sky-300
+                hover:shadow-[0_0_28px_rgba(125,211,252,0.55)]
               "
             >
               <Mail size={17} strokeWidth={1.8} />
@@ -92,7 +90,8 @@ export function Contact() {
               />
             </a>
           </MagneticButton>
-          {/* GitHub */}
+
+          {/* GitHub - Frosted Dark Navy */}
           <MagneticButton>
             <a
               href="https://github.com/Pravin671231"
@@ -100,14 +99,17 @@ export function Contact() {
               rel="noopener noreferrer"
               className="
                 group inline-flex items-center gap-2
-                rounded-sm border border-border
-                bg-bg-elevated
+                rounded-sm border border-sky-400/20
+                bg-[#07131e]/70
                 px-6 py-3.5
                 text-sm font-medium
+                text-slate-100
+                backdrop-blur-md
                 transition-all duration-300
                 hover:-translate-y-0.5
-                hover:border-accent-blue/40
-                hover:bg-bg
+                hover:border-sky-400/50
+                hover:bg-[#0a1f33]/85
+                hover:text-sky-300
               "
             >
               <Globe size={17} strokeWidth={1.8} />
@@ -125,7 +127,7 @@ export function Contact() {
             </a>
           </MagneticButton>
 
-          {/* Resume */}
+          {/* Resume - Frosted Dark Navy with Cyan Accent */}
           <MagneticButton>
             <a
               href="/resume.pdf"
@@ -133,14 +135,17 @@ export function Contact() {
               rel="noopener noreferrer"
               className="
                 group inline-flex items-center gap-2
-                rounded-sm border border-border
-                bg-bg-elevated
+                rounded-sm border border-sky-400/20
+                bg-[#07131e]/70
                 px-6 py-3.5
                 text-sm font-medium
+                text-slate-100
+                backdrop-blur-md
                 transition-all duration-300
                 hover:-translate-y-0.5
-                hover:border-accent-purple/40
-                hover:bg-bg
+                hover:border-cyan-400/50
+                hover:bg-[#0a1f33]/85
+                hover:text-cyan-300
               "
             >
               <FileText size={17} strokeWidth={1.8} />
@@ -157,10 +162,7 @@ export function Contact() {
               />
             </a>
           </MagneticButton>
-
         </div>
-
-        
       </div>
     </section>
   );

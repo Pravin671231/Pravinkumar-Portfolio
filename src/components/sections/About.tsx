@@ -15,21 +15,21 @@ export function About() {
       <div className="mx-auto max-w-3xl">
         <div>
           <ScrollReveal delay={0.1}>
-            <p className="mb-4 font-mono text-xs uppercase tracking-[0.08em] text-accent-blue">
+            <p className="mb-4 font-mono text-xs uppercase tracking-[0.08em] text-sky-400">
               About
             </p>
 
-            <h2 className="mb-4 text-h1 font-semibold">
+            <h2 className="mb-2 text-h1 font-semibold text-slate-100">
               Pravinkumar K
             </h2>
           </ScrollReveal>
 
           <ScrollReveal delay={0.2}>
-            <p className="mb-2 text-text-muted">
+            <p className="mb-6 font-mono text-sm text-sky-300/90">
               Full Stack Developer
             </p>
 
-            <div className="mb-6 space-y-4 leading-relaxed text-text-muted">
+            <div className="mb-6 space-y-4 leading-relaxed text-slate-300">
               <p>
                 I&apos;m a Full Stack Developer focused on building practical,
                 reliable, and maintainable web applications. I work across the
@@ -57,12 +57,15 @@ export function About() {
                 <span
                   key={skill}
                   className="
-                    rounded-sm border border-border
-                    px-3 py-1
-                    font-mono text-xs
-                    transition-colors duration-200
-                    hover:border-accent-blue/40
-                    hover:text-accent-blue
+                    rounded-sm border border-sky-400/15
+                    bg-[#07131e]/70 px-3 py-1
+                    font-mono text-xs text-slate-300
+                    backdrop-blur-md
+                    transition-all duration-200
+                    hover:-translate-y-0.5
+                    hover:border-sky-400/50
+                    hover:bg-sky-400/10
+                    hover:text-sky-200
                   "
                 >
                   {skill}
@@ -79,15 +82,15 @@ export function About() {
                 className="
                   inline-flex items-center gap-2
                   rounded-sm
-                  bg-text
+                  bg-sky-400
                   px-6 py-3
                   text-sm font-medium
-                  text-bg
+                  text-[#040b12]
+                  shadow-[0_0_20px_rgba(56,189,248,0.3)]
                   transition-all duration-300
                   hover:-translate-y-0.5
-                  hover:opacity-90
-                  hover:shadow-lg
-                  hover:shadow-text/10
+                  hover:bg-sky-300
+                  hover:shadow-[0_0_28px_rgba(125,211,252,0.5)]
                 "
               >
                 <FileText size={16} strokeWidth={1.8} />

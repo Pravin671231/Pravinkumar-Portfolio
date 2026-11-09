@@ -12,7 +12,7 @@ export function Projects() {
       className="relative px-(--space-container-x) py-(--space-section-y)"
     >
       <div className="mx-auto max-w-6xl">
-        <p className="mb-4 font-mono text-xs uppercase tracking-[0.08em] text-text-muted">
+        <p className="mb-4 font-mono text-xs uppercase tracking-[0.08em] text-accent-blue">
           Selected Work
         </p>
         <h2 className="mb-6 text-h1 font-semibold md:mb-12">Projects</h2>
@@ -23,7 +23,7 @@ export function Projects() {
               <ScrollReveal delay={Math.min(i * 0.1, 0.3)}>
                 <ProjectCard project={project} index={i} />
               </ScrollReveal>
-              {project.proofofwork && <ProofOfWork />}
+              {/* {project.proofofwork && <ProofOfWork />} */}
             </div>
           ))}
         </div>
