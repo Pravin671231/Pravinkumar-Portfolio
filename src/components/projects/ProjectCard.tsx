@@ -28,7 +28,7 @@ const VIEWPORTS: Record<
   desktop: {
     label: "Desktop",
     icon: Monitor,
-    frameClass: "w-full h-full",
+    frameClass: "w-[65%] h-full mx-auto",
     iframeClass: "w-[200%] h-[200%] scale-50",
   },
   tablet: {
